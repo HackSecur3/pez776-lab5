@@ -16,4 +16,8 @@ public class Role {
     public String getName() {
         return this.name;
     }
+
+    public String toString(){
+        return String.format("%s",this.name);
+    }
 }

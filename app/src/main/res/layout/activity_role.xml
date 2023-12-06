@@ -1,9 +1,107 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".RoleActivity">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:layout_gravity="center_horizontal"
+android:orientation="vertical"
+tools:context=".RoleActivity">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+<ImageView
+    android:id="@+id/Roleimage"
+    android:layout_width="wrap_content"
+    android:layout_height="125dp"
+    android:layout_gravity="center_horizontal"
+    android:layout_marginBottom="150dp"
+    android:src="@drawable/mage"/>
+
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center_horizontal"
+    android:layout_marginTop="-130dp"
+    android:layout_marginBottom="150dp"
+    android:fontFamily="@font/eyonders"
+    android:text="Name:"
+    android:textSize="30sp"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent" />
+
+
+    <TextView
+        android:id="@+id/realname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="-150dp"
+        android:layout_marginBottom="275dp"
+        android:text="TextView"
+        android:textSize="20dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="-130dp"
+        android:layout_marginBottom="250dp"
+        android:fontFamily="@font/eyonders"
+        android:text="Role(s):"
+        android:id="@+id/roles"
+        android:textSize="22sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/realname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="-250dp"
+        android:layout_marginBottom="200dp"
+        android:text="TextView"
+        android:textSize="20dp" />
+
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Button
+            android:id="@+id/act1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:backgroundTint="@color/black"
+            android:fontFamily="@font/chatime"
+            android:text="Act I" />
+
+        <Button
+            android:id="@+id/act2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:backgroundTint="@color/black"
+            android:fontFamily="@font/chatime"
+            android:text="Act II" />
+
+        <Button
+            android:id="@+id/logout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:backgroundTint="@color/black"
+            android:fontFamily="@font/chatime"
+            android:text="Log Out" />
+
+
+
+
+    </FrameLayout>
+
+
+</LinearLayout>

@@ -18,9 +18,9 @@ public class Act {
 
     private ArrayList<Scene> Scenes;
 
-    public Act(int num, ArrayList<Scene> Scenes){
+    public Act(int num){
         this.num = num;
-        this.Scenes = Scenes;
+        Scenes = new ArrayList<>();
     }
 
     public void setNum(int num){
@@ -63,7 +63,7 @@ public class Act {
                 Scene newScene = new Scene(counter++,title,characterlist);
                 Scenes.add(newScene);
             }
-            Act newAct = new Act(num,Scenes);
+            Act newAct = new Act(num);
         }catch(FileNotFoundException e){
             Log.d("File Exception", "File not Found");
 
@@ -73,4 +73,15 @@ public class Act {
         }
     }
 
+    public String toString(){
+        String entireact = "";
+        for(Scene scene: Scenes){
+            entireact = entireact + scene.getTitle();
+            for(Role roles: scene.getScRoles()){
+                entireact = entireact + roles.getName() + ",";
+            }
+            entireact = entireact + "\n";
+        }
+        return String.format("%s",entireact);
+    }
 }

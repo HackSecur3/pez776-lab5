@@ -1,7 +1,12 @@
 package com.example.pez776_lab5.model;
 
+import android.app.Activity;
 import android.content.res.AssetManager;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.util.Log;
+
+import androidx.annotation.NonNull;
 
 import com.example.pez776_lab5.MainActivity;
 
@@ -15,110 +20,96 @@ import java.nio.Buffer;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class User {
+public class User{
+
 
     private String username;
-
     private String password;
-
     private String realname;
 
     private ArrayList<Role> Roles;
 
     private ArrayList<User> Users = new ArrayList<User>();
 
-    public User(String username,String password,String realname,ArrayList<Role> Roles){
+    public User(String username, String password, String realname) {
         this.username = username;
         this.password = password;
         this.realname = realname;
-        this.Roles = Roles;
+        this.Roles = new ArrayList<>();
     }
 
-    public void setUsername(String username){
+    public User() {
+
+    }
+
+
+
+
+
+    public void setUsername(String username) {
         this.username = username;
     }
 
-    public String getUsername(){
+    public String getUsername() {
         return this.username;
     }
 
-    public void setPassword(String password){
+    public void setPassword(String password) {
         this.password = password;
     }
-    public String getPassword(){
+
+    public String getPassword() {
         return this.password;
     }
 
-    public void setRealname(String realname){
+    public void setRealname(String realname) {
         this.realname = realname;
     }
 
-    public String getRealname(){
+    public String getRealname() {
         return this.realname;
     }
-    public void setRoles(ArrayList<Role> Roles){
+
+    public void setRoles(ArrayList<Role> Roles) {
         this.Roles = Roles;
     }
-    public ArrayList<Role> getRoles(){
+
+    public ArrayList<Role> getRoles() {
         return this.Roles;
     }
 
-
-    public static int[] countFieldsPerLine(String filePath) throws IOException {
-        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
-            String line;
-            int lineNumber = 0;
-
-            // Create an array to store the field counts for each line
-            int[] fieldCounts = new int[getLineCount(filePath)];
-
-            while ((line = reader.readLine()) != null) {
-                String[] fields = line.split(","); // Change the delimiter if necessary
-
-                int fieldCount = fields.length;
-                fieldCounts[lineNumber++] = fieldCount;
+    public Role getRole(String realName){
+        for(Role role: Roles){
+            if(role.getName().equals(realName)){
+                return role;
             }
-
-            return fieldCounts;
         }
+        return null;
     }
 
-    public static int getLineCount(String filePath) throws IOException {
-        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
-            int lines = 0;
-            while (reader.readLine() != null) {
-                lines++;
-            }
-            return lines;
-        }
-    }
-
-    public void loadUser(MainActivity activity) {
+    public void loadUser(Activity activity) {
         AssetManager manager = activity.getAssets();
-        int count =0;
         try {
             InputStream stream = manager.open("users.csv");
             Scanner scanner = new Scanner(stream);
-            int[] fieldCounts = countFieldsPerLine("user.csv");
-            while(scanner.hasNextLine()) {
+            while (scanner.hasNextLine()) {
                 String line = scanner.nextLine();
                 String[] lineSplit = line.trim().split(",");
-                String username = lineSplit[0].trim();
-                String password = lineSplit[1].trim();
+                String username = lineSplit[0].trim().toLowerCase();
+                String password = lineSplit[1].trim().toLowerCase();
                 String realname = lineSplit[2].trim();
-                if(fieldCounts[count] == 4){
-                    Role newcharacter1 = new Role(lineSplit[3].trim());
-                    Roles.add(newcharacter1);
-                    Role newcharacter2 = new Role(lineSplit[4].trim());
-                    Roles.add(newcharacter2);
-                } else {
-                    Role newcharacter = new Role(lineSplit[3].trim());
-                    Roles.add(newcharacter);
+                User newUser = new User(username, password, realname);
+
+                for (int i = 3; i < lineSplit.length; ++i) {
+                    String roleName = lineSplit[i].trim();
+                    Role newRole = new Role(roleName);
+                    newUser.getRoles().add(newRole);
                 }
-                User newuser = new User(username,password,realname,Roles);
-                Users.add(newuser);
-                count++;
+
+                Users.add(newUser);
+
             }
+            scanner.close();
         } catch (FileNotFoundException e) {
             Log.d("File Exception", "File not Found");
         } catch (IOException e) {
@@ -126,21 +117,25 @@ public class User {
         }
     }
 
+    public User getUser(String userName){
+        for (User user : Users) {
+            if (user.getUsername().equalsIgnoreCase(userName)) {
+                    return user;
+            }
+        }
+        return null;
+    }
 
-    public boolean ValidateUser(String username,String password) {
-        for (User User : Users) {
-            if(User.getUsername()==username){
-                if(User.getPassword()==password){
+    public boolean validate(String userName, String password) {
+        for (User user : Users) {
+            if (user.getUsername().equalsIgnoreCase(userName)) {
+                if (user.getPassword().equalsIgnoreCase(password)) {
                     return true;
                 }
-                else{
-                    return false;
-                }
-            }
-            else{
-                return false;
             }
         }
         return false;
     }
+
+
 }

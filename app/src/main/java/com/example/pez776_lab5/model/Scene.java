@@ -35,10 +35,11 @@ public class Scene {
         this.ScRoles = Roles;
     }
 
-    public ArrayList<Role>ScRoles(ArrayList<Role> ScRoles){
+    public ArrayList<Role> getScRoles(){
         return this.ScRoles;
     }
     public void addRole(Role role){
         ScRoles.add(role);
     }
+
 }
